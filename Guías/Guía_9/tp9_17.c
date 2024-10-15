@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <assert.h>
+#include <ctype.h>
 
+int bienformado(char * s); 
 
 int main(void) {
  char * zero[]={"abcd4a10bb2", "", "0000", "a1", "abc3", "0a1"};
@@ -20,3 +22,12 @@ int main(void) {
   puts("OK!");
   return 0;
 }
+
+int bienformado(char * s) {
+    if (*s == 0) return 0;
+    int res = bienformado(s+1);
+    if (res < 0) return res;
+    if (isdigit(*s) && res == 0) return *s - '0';
+    if (isalpha(*s)) return res-1;
+    return -1;
+}   

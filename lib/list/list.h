@@ -32,4 +32,9 @@ tList tail(tList l);
 // Elimina un elemento de la lista y libera su espacio (Requiere lista ordenada ascendentemente)
 tList delete(tList l, int elem);
 
+// Convierte una lista a arreglo
+int * toArray(tList l, size_t * dim);
+
+int getElemAtIndex(const tList l, int inx);
+
 #endif

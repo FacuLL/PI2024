@@ -1,6 +1,7 @@
 #include "./list.h"
 #include <stdlib.h>
 #include <assert.h>
+#define BLOQUE 5
 
 int isEmpty(const tList l) {
     return l == NULL;
@@ -30,7 +31,7 @@ tList add(tList l, int elem) {
 }
 
 tList delete(tList l, int elem) {
-    if (l == NULL || elem > l->head) return l;
+    if (l == NULL || elem < l->head) return l;
     if (elem == l->head) {
         tList aux = l->tail;
         free(l);
@@ -49,4 +50,36 @@ void freeList(tList l) {
 int head(tList l) {
     assert(!isEmpty(l));
     return l->head;
+}
+
+int tail(tList l) {
+    assert(!isEmpty(l));
+    return l->tail;
+}
+
+int * toArray(tList l, size_t * dim) {
+    int * arr = NULL;
+    *dim = 0;
+    while (!isEmpty(l)) {
+        if (*dim%BLOQUE == 0) arr = realloc(arr, sizeof(int)*BLOQUE);
+        arr[(*dim)++] = l->head;
+        l = l->tail;
+    }
+    if (*dim == 0) {
+        free(arr);
+        retrun NULL;
+    }
+    arr = realloc(arr, sizeof(int)*(*dim));
+    return arr;
+}
+
+int getElemAtIndexRec(const tList l, int idx) {
+    assert(!isEmpty(l));
+    if (idx == 0) return l->head;
+    return getElemAtIndex(l->tail, idx-1);
+}
+
+int getElemAtIndex(const tList l, int idx) {
+    assert(idx >= 0);
+    return getElemAtIndexRec(l, idx);
 }
