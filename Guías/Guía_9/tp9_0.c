@@ -11,9 +11,9 @@ int strlen(char *s) {
     return 1 + strlen(s+1);
 }
 
-int strchr(char *s, char c) {
-    if (*s == c) return 0;
-    return 1 + strchr(s+1, c);
+char * strchr(char *s, char c) {
+    if (*s == c) return s;
+    return strchr(s+1, c);
 }
 
 int main(void) {
