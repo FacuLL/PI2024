@@ -9,6 +9,13 @@ int cmpFun(char * s1, char * s2) {
     return strcmp(s1, s2);
 }
 
+int hasFourLettersOrMore(char *s) {
+    for (int i = 0; i<4; i++) {
+        if (s[i] == 0) return 0;
+    }
+    return 1;
+}
+
 int compareArray(char ** a1, int dim1, char ** a2, int dim2) {
     if (dim1 != dim2) return 0;
     for (int i = 0; i < dim1; i++) {
@@ -47,6 +54,18 @@ int main(void) {
     toBegin(l);
     for (int i = 0; hasNext(l); i++)
         assert(cmpFun(next(l), expected[i]) == 0);
+
+    add(l, "asd");
+    add(l, "hasta pronto");
+    add(l, "tobias");
+    add(l, "estoy programando en c aaa");
+
+    char * expected2[] = {"chau", "estoy programando en c aaa", "hasta pronto", "hola", "tobias"};
+    int dim = 0;
+    result = select(l, hasFourLettersOrMore, &dim);
+    assert(dim == 5);
+    assert(compareArray(expected2, sizeof(expected2) / sizeof(expected2[0]), result, dim) == 1);
+    free(result);
 
     freeList(l);
     puts("OK!");

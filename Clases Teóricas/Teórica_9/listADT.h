@@ -19,6 +19,8 @@ void deleteElem(listADT, elemType);
 // Devuelve un arreglo copia de la lista.
 elemType * toArray(const listADT);
 
+elemType * select(const listADT, int (*) (char *), int *);
+
 // Retorna la dimension de la lista.
 int elemCount(const listADT);
 

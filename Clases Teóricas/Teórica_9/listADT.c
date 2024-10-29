@@ -1,6 +1,7 @@
 #include "listADT.h"
 #include <stdlib.h>
 #include <assert.h>
+#define BLOQUE 3
 
 struct node {
     elemType head;
@@ -80,6 +81,21 @@ elemType * toArray(const listADT l) {
     tList list = l->list;
     for(int i = 0; i < l->elemCount; i++, list=list->tail)
         array[i] = list->head;
+    return array;
+}
+
+elemType * select(const listADT l, int (*criteria) (char *), int *dimRes) {
+    elemType *array = NULL;
+    *dimRes = 0;
+    tList list = l->list;
+    for(int i = 0; i < l->elemCount; i++, list=list->tail)
+        if (criteria(list->head)) {
+            if (*dimRes % BLOQUE == 0)
+                array = realloc(array, sizeof(elemType) * (*dimRes+BLOQUE));
+            array[(*dimRes)++] = list->head;
+        }
+    if (*dimRes != 0)
+        array = realloc(array, sizeof(elemType) * (*dimRes));
     return array;
 }
 
