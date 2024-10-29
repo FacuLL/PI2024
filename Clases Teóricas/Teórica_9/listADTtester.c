@@ -24,16 +24,19 @@ int main(void) {
     add(l, "hola");
     assert(elemCount(l) == 1);
     add(l, "chau");
+    add(l, "tobias");
+    assert(elemCount(l) == 3);
+    deleteElem(l, "tobias");
     assert(elemCount(l) == 2);
     assert(belongs(l, "hola") == 1);
     assert(belongs(l, "hasta luego") == 0);
     assert(isEmpty(l) == 0);
 
-    char * expected[2] = {"hola", "chau"};
+    char * expected[2] = {"chau", "hola"};
 
     // Opcion 1: Recorrer con arreglo (Ineficiente, duplica elementos).
     char ** result = toArray(l);
-    assert(compareArray(expected, sizeof(expected) / sizeof(expected[0]), result, elemCount(l)) == 0);
+    assert(compareArray(expected, sizeof(expected) / sizeof(expected[0]), result, elemCount(l)) == 1);
     free(result);
 
     // Opcion 2: Recorrer con getElemAtIndex (Ineficiente, recorre de mas).
@@ -43,8 +46,9 @@ int main(void) {
     // Opcion 3: Recorrer con iteradores (Eficiente).
     toBegin(l);
     for (int i = 0; hasNext(l); i++)
-        assert(cmpFun(next(l), expected[i]));
+        assert(cmpFun(next(l), expected[i]) == 0);
 
     freeList(l);
+    puts("OK!");
     return 0;
 }

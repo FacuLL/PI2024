@@ -25,8 +25,8 @@ listADT newList(cmp cmpFun) {
 }
 
 static tList addRec(tList list, elemType elem, cmp cmpFun, int *added) {
-    int result = cmpFun(list->head, elem);
-    if (list == NULL || result > 0) {
+    int result;
+    if (list == NULL || (result = cmpFun(list->head, elem)) > 0) {
         tList new = malloc(sizeof(struct node));
         new->head = elem;
         new->tail = list;
@@ -54,8 +54,8 @@ int isEmpty(const listADT l) {
 }
 
 static int belongsRec(tList list, elemType elem, cmp cmpFun) {
-    int result = cmpFun(list->head, elem);
-    if (list == NULL || result > 0) return 0;
+    int result;
+    if (list == NULL || (result = cmpFun(list->head, elem)) > 0) return 0;
     if (result == 0) return 1;
     return belongsRec(list->tail, elem, cmpFun);
 }
@@ -106,7 +106,7 @@ static tList getElemAtIndexRec(tList list, int idx) {
 }
 
 elemType getElemAtIndex(const listADT l, int idx) {
-    assert(idx > 0 && l->elemCount > idx);
+    assert(idx >= 0 && l->elemCount > idx);
     return getElemAtIndexRec(l->list, idx)->head;
 }
 
