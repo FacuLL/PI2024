@@ -15,6 +15,10 @@ main(void) {
     dequeue(q, &aux);
     assert(aux == 9);
     queue(q, 1);
+    toBegin(q);
+    assert(next(q) == 3);
+    assert(next(q) == 1);
+    assert(!hasNext(q));
     dequeue(q, &aux);
     assert(aux == 3);
     dequeue(q, &aux);

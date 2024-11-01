@@ -16,5 +16,9 @@ void queue(queueADT, elementType);
 void dequeue(queueADT, elementType *out);
 // Devuelve 1 si la cola esta vacia y 0 en caso contrario.
 int isEmpty(queueADT);
+// Iteradores
+void toBegin(queueADT);
+int hasNext(queueADT);
+elementType next(queueADT);
 
 #endif

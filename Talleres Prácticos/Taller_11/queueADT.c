@@ -10,6 +10,7 @@ typedef struct node {
 struct queueCDT {
     tNode *first;
     tNode *last;
+    tNode *current;
 };
 
 queueADT newQueue(void) {
@@ -44,4 +45,19 @@ void dequeue(queueADT queue, elementType *out) {
 
 int isEmpty(queueADT queue) {
     return queue->first == NULL;
+}
+
+void toBegin(queueADT queue) {
+    queue->current = queue->first;
+}
+
+int hasNext(queueADT queue) {
+    return queue->current != NULL;
+}
+
+elementType next(queueADT queue) {
+    assert(hasNext(queue));
+    elementType aux = queue->current->value;
+    queue->current = queue->current->next;
+    return aux;
 }
