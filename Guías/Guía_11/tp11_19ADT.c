@@ -1,4 +1,4 @@
-#include "skipListADT.h"
+#include "tp11_19ADT.h"
 #include <stdlib.h>
 #include <assert.h>
 
@@ -18,9 +18,9 @@ struct skipListCDT {
 };
 
 skipListADT createSkipList(unsigned char max_level, compare cmp) {
-	skipListADT new = malloc(sizeof(skipListCDT));
+	skipListADT new = malloc(sizeof(struct skipListCDT));
 	new->max_level = max_level;
-	new->levels = calloc(sizeof(tNode)*(max_level+1));
+	new->levels = calloc(1, sizeof(tNode)*(max_level+1));
 	new->cmp = cmp;
 	return new;
 }
@@ -83,13 +83,13 @@ int hasNext(const skipListADT list) {
 }
 
 elemType next(skipListADT list) {
-	assert(hasNext(list);
+	assert(hasNext(list));
 	elemType aux = list->current->elem;
 	list->current = list->current->tails[0];
 	return aux;
 }
 
-void freeRec(tList l) {
+void freeRec(tList list) {
 	if (list == NULL) return;
 	freeList(list->tails[0]);
 	free(list->tails);
@@ -101,4 +101,6 @@ void freeList(skipListADT list) {
 	free(list);
 }
 
-void display(skipListADT list);
+void display(skipListADT list) {
+
+}

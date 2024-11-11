@@ -2,7 +2,7 @@
 
 #include <stdio.h>
 #include <assert.h>
-#include "skipListADT.h"
+#include "tp11_19ADT.h"
 #include <stdlib.h>
 
 int cmpInt(int n1, int n2) {
